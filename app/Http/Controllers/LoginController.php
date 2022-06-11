@@ -36,10 +36,10 @@ class LoginController extends Controller
                 return redirect()->route('dashboard');
                 // dd(session()->all());
             }else {
-                echo "Your Session Has Not Been Stored";
+                return redirect()->route('login')->with('pass_error', 'Password Is Not Matched!');
             }
         }else {
-            echo "Email Is Not Correct!";
+            return redirect()->route('login')->with('email_error', 'Email Is Not Correct!');
         }
     }
 
@@ -70,6 +70,6 @@ class LoginController extends Controller
 
     public function logout(Request $request){
         $request->session()->forget('user_id');
-        return redirect()->route('login');
+        return redirect()->route('login')->with('logout', 'You Have Been Successfully Logged Out.');
     }
 }
